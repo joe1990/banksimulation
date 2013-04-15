@@ -1,11 +1,14 @@
+package ch.bfh.ti.pbs.customers;
 import java.util.ArrayList;
+
+import ch.bfh.ti.pbs.bankaccounts.BankAccount;
 
 public class Customer
 {
    private String name;
    private ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
 
-   Customer(String aName, BankAccount firstAccount)
+   public Customer(String aName, BankAccount firstAccount)
    {
       name = aName;
       addBankAccount(firstAccount);

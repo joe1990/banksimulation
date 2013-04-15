@@ -1,3 +1,4 @@
+package ch.bfh.ti.pbs.helpers;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

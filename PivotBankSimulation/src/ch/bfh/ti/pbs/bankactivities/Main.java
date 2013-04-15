@@ -1,8 +1,23 @@
+package ch.bfh.ti.pbs.bankactivities;
+
+
+import org.apache.pivot.wtk.DesktopApplicationContext;
+
+import ch.bfh.ti.pbs.bankaccounts.BankAccount;
+import ch.bfh.ti.pbs.bankaccounts.CheckingAccount;
+import ch.bfh.ti.pbs.bankaccounts.SavingsAccount;
+import ch.bfh.ti.pbs.bankaccounts.TimeDepositAccount;
+import ch.bfh.ti.pbs.bxml.BankSimulation;
+import ch.bfh.ti.pbs.customers.Customer;
+import ch.bfh.ti.pbs.helpers.DateTime;
+import ch.bfh.ti.pbs.helpers.Decimal;
+
 public class Main
 {     
    public static void main(String[] args)
    {  
       // Add interest rates
+       /*
       CheckingAccount.interestRates.add(new InterestRate(new DateTime(2012,1,1), new Decimal(0)));
       SavingsAccount.interestRates.add(new InterestRate(new DateTime(2012,1,1), new Decimal(12).divide(new Decimal(8))));
       SavingsAccount.interestRates.add(new InterestRate(new DateTime(2013,3,1), new Decimal(13).divide(new Decimal(8))));
@@ -45,6 +60,9 @@ public class Main
       //for (Transaction t : A.getAccount(0).getTransactions()) System.out.println(t.toString());
       //for (Transaction t : B.getAccount(0).getTransactions()) System.out.println(t.toString());
       //for (Transaction t : C.getAccount(0).getTransactions()) System.out.println(t.toString());
+       */
+       
+       DesktopApplicationContext.main(BankSimulation.class, args);
    }
    
    /**

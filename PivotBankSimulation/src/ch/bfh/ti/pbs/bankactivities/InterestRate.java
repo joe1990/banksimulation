@@ -1,3 +1,7 @@
+package ch.bfh.ti.pbs.bankactivities;
+import ch.bfh.ti.pbs.helpers.DateTime;
+import ch.bfh.ti.pbs.helpers.Decimal;
+
 public class InterestRate
 {
    private DateTime validFrom;

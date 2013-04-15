@@ -1,3 +1,7 @@
+package ch.bfh.ti.pbs.bankaccounts;
+import ch.bfh.ti.pbs.helpers.DateTime;
+import ch.bfh.ti.pbs.helpers.Decimal;
+
 public class TimeDepositAccount extends SavingsAccount
 {
    // Private static variables

@@ -1,4 +1,10 @@
+package ch.bfh.ti.pbs.bankaccounts;
+
 import java.util.ArrayList;
+
+import ch.bfh.ti.pbs.bankactivities.InterestRate;
+import ch.bfh.ti.pbs.helpers.DateTime;
+import ch.bfh.ti.pbs.helpers.Decimal;
 
 public class CheckingAccount extends BankAccount
 {  

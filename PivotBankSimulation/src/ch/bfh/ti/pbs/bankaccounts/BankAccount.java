@@ -1,5 +1,10 @@
+package ch.bfh.ti.pbs.bankaccounts;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import ch.bfh.ti.pbs.bankactivities.Transaction;
+import ch.bfh.ti.pbs.helpers.DateTime;
+import ch.bfh.ti.pbs.helpers.Decimal;
 
 public abstract class BankAccount
 {    
