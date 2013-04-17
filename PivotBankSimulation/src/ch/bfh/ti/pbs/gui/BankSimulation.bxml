@@ -1,5 +1,5 @@
 <bankSimulation:BankSimulationWindow title="Bank Simulation" maximized="true"
-    styles="{padding:{top:0, left:4, bottom:4, right:4}, showWindowControls:false}"
+    styles="{padding:{top:1, left:1, bottom:1, right:1}, showWindowControls:false}"
     xmlns:bxml="http://pivot.apache.org/bxml"
     xmlns:content="org.apache.pivot.wtk.content"
     xmlns:bankSimulation="ch.bfh.ti.pbs.gui"
@@ -14,7 +14,7 @@
     </actionMappings>
     
      <TablePane bxml:id="tblpOuter" styles="{verticalSpacing:1, showHorizontalGridLines:true,
-  		horizontalSpacing:1, showVerticalGridLines:true}">
+  		horizontalSpacing:1, showVerticalGridLines:true, backgroundColor:'#DAE0F1'}">
        	<columns>
         	<TablePane.Column width="1*"/>
         </columns>
@@ -23,13 +23,13 @@
        	</TablePane.Row>
         <TablePane.Row height="1*">
 	      	<TablePane bxml:id="tblpInner" styles="{verticalSpacing:1, showHorizontalGridLines:true,
-	        	horizontalSpacing:1, showVerticalGridLines:true}">
+	        	horizontalSpacing:1, showVerticalGridLines:true, padding:0}">
 	        	<columns>
 	            	<TablePane.Column width="250"/>
 	               	<TablePane.Column width="1*"/>
 	           	</columns>
 	            <TablePane.Row height="1*">
-	            	<TreeView bxml:id="trvUsers" />
+	            	<TreeView styles="{backgroundColor:'#FFFFFF'}" bxml:id="trvUsers" />
 		    		<bxml:include bxml:id="tbpAccountDetails" src="TabPane.bxml"/>
 	            </TablePane.Row>
 	     	</TablePane>

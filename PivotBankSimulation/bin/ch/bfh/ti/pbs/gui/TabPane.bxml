@@ -1,23 +1,51 @@
-<TabPane xmlns:bxml="http://pivot.apache.org/bxml"
+<tabPanel:TabPanel xmlns:bxml="http://pivot.apache.org/bxml"
     xmlns:content="org.apache.pivot.wtk.content"
-    xmlns="org.apache.pivot.wtk">
-    <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+    xmlns="org.apache.pivot.wtk"
+    xmlns:tabPanel="ch.bfh.ti.pbs.gui"
+    styles="{ activeTabColor:'#CEDDED'}">
+    <BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
         <TabPane.tabData>
             <content:ButtonData text="Customer"/>
         </TabPane.tabData>
-        <Border styles="{padding:2}">
-            <Label text="120x90" preferredWidth="120" preferredHeight="90"
-                styles="{horizontalAlignment:'center', verticalAlignment:'center'}"/>
-        </Border>
+        <Border>
+	        <TablePane>
+	        	<columns>
+	            	<TablePane.Column width="1*"/>
+	        	</columns>
+	        		
+	        	<TablePane.Row height="1*">
+	        		<BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
+			        	<BoxPane>
+			            	<Label text="Firstname"/>
+			         		<TextInput bxml:id="txtFirstName"/>
+			           	</BoxPane>
+			            <BoxPane>
+			            	<Label text="Lastname"/>
+			         		<TextInput bxml:id="txtLastName"/>
+			            </BoxPane>
+			       	</BoxPane>
+	        	</TablePane.Row>        	
+	        </TablePane>
+		</Border>
     </BoxPane>
 
-    <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+    <BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
         <TabPane.tabData>
             <content:ButtonData text="Transactions"/>
         </TabPane.tabData>
-        <Border styles="{padding:2}">
-            <Label text="240x180" preferredWidth="240" preferredHeight="180"
-                styles="{horizontalAlignment:'center', verticalAlignment:'center'}"/>
-        </Border>
+       	<ScrollPane>
+            <TableView bxml:id="tableView">
+                <columns>
+                    <TableView.Column name="clmData" width="100" headerData="Date"/>
+                    <TableView.Column name="clmAmount" width="100" headerData="Amount"/>
+                    <TableView.Column name="clmBalance" width="100" headerData="Balance"/>
+                    <TableView.Column name="clmRemark" width="100" headerData="Remark"/>
+                </columns>
+            </TableView>
+ 
+            <columnHeader>
+                <TableViewHeader tableView="$tableView"/>
+            </columnHeader>
+        </ScrollPane>
     </BoxPane>
-</TabPane>
+</tabPanel:TabPanel>

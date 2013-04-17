@@ -19,7 +19,9 @@ import org.apache.pivot.wtk.Action;
 import org.apache.pivot.wtk.Component;
 import org.apache.pivot.wtk.FileBrowserSheet;
 import org.apache.pivot.wtk.Frame;
+import org.apache.pivot.wtk.TextInput;
 import org.apache.pivot.wtk.TreeView;
+import org.apache.pivot.wtk.TreeViewBranchListener;
 import org.apache.pivot.wtk.content.TreeBranch;
 import org.apache.pivot.wtk.content.TreeNode;
 
@@ -70,7 +72,6 @@ public class BankSimulationWindow extends Frame implements Bindable
                 in.close();
                 
                 fillTreeView(firstBankOfJava.Customers);
-                
             } catch (IOException e)
             {
                 e.printStackTrace();
@@ -86,6 +87,7 @@ public class BankSimulationWindow extends Frame implements Bindable
     private void fillTreeView(ArrayList<Customer> customers) {
         TreeBranch rootBranch = new TreeBranch();
         
+        
         for(Customer customer: customers)
         {
             TreeBranch customerBranch = new TreeBranch();
@@ -100,6 +102,7 @@ public class BankSimulationWindow extends Frame implements Bindable
             }
             rootBranch.add(customerBranch);
         }
+        
         trvUsers.setTreeData(rootBranch);
     }
     
