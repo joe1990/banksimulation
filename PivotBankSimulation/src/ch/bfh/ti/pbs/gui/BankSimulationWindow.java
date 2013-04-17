@@ -14,6 +14,8 @@ import java.util.List;
 import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.Bindable;
 import org.apache.pivot.collections.Map;
+import org.apache.pivot.collections.Sequence;
+import org.apache.pivot.collections.Sequence.Tree.Path;
 import org.apache.pivot.util.Resources;
 import org.apache.pivot.wtk.Action;
 import org.apache.pivot.wtk.Component;
@@ -22,6 +24,8 @@ import org.apache.pivot.wtk.Frame;
 import org.apache.pivot.wtk.TextInput;
 import org.apache.pivot.wtk.TreeView;
 import org.apache.pivot.wtk.TreeViewBranchListener;
+import org.apache.pivot.wtk.TreeViewNodeListener;
+import org.apache.pivot.wtk.TreeViewSelectionListener;
 import org.apache.pivot.wtk.content.TreeBranch;
 import org.apache.pivot.wtk.content.TreeNode;
 
@@ -72,6 +76,7 @@ public class BankSimulationWindow extends Frame implements Bindable
                 in.close();
                 
                 fillTreeView(firstBankOfJava.Customers);
+                
             } catch (IOException e)
             {
                 e.printStackTrace();
@@ -85,19 +90,50 @@ public class BankSimulationWindow extends Frame implements Bindable
     }
     
     private void fillTreeView(ArrayList<Customer> customers) {
+        
+        trvUsers.getTreeViewSelectionListeners().add(new TreeViewSelectionListener()
+        {
+            
+            @Override
+            public void selectedPathsChanged(TreeView arg0, Sequence<Path> arg1){}
+            
+            @Override
+            public void selectedPathRemoved(TreeView arg0, Path arg1){}
+            
+            @Override
+            public void selectedPathAdded(TreeView arg0, Path arg1){}
+            
+            @Override
+            public void selectedNodeChanged(TreeView arg0, Object arg1)
+            {
+                TreeNode treeNode = (TreeNode) arg0.getSelectedNode();
+                if (arg0.getSelectedNode()  instanceof TreeBranch) {
+                    Customer customer = (Customer) treeNode.getUserData();
+                    System.out.println(customer.getName());
+                } else {
+                    BankAccount bankAccount = (BankAccount) treeNode.getUserData();
+                    Customer customer = (Customer) treeNode.getParent().getUserData();
+                    System.out.println(bankAccount);
+                    System.out.println(customer.getName());
+                }
+            }
+        });
+        
+        
         TreeBranch rootBranch = new TreeBranch();
-        
-        
         for(Customer customer: customers)
         {
             TreeBranch customerBranch = new TreeBranch();
+                       
             customerBranch.setText(customer.getName());
             customerBranch.setIcon("/ch/bfh/ti/pbs/gui/user.png");
+            customerBranch.setUserData(customer);
             
             for(BankAccount account: customer.getAccounts()) {
                 TreeNode accountNode = new TreeNode();
                 accountNode.setText(String.valueOf(account.getAccountNumber()));
                 accountNode.setIcon("/ch/bfh/ti/pbs/gui/bankaccount.png");
+                accountNode.setUserData(account);
                 customerBranch.add(accountNode);
             }
             rootBranch.add(customerBranch);
@@ -168,13 +204,6 @@ public class BankSimulationWindow extends Frame implements Bindable
         } catch (Exception e) {
             // TODO Auto-generated catch block
             System.out.println("Heute nicht");
-        }
-
-        try {
-            firstBankOfJava.Customers.get(0).getAccount(0).deposit(new DateTime(), new Decimal(10000), "So cool");
-        } catch (UnderFlowException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
         
         System.out.println(firstBankOfJava.toString());        

@@ -14,11 +14,15 @@ public class TabPanel extends TabPane implements Bindable
     @BXML private TextInput txtFirstName;
     @BXML private TextInput txtLastName;
     
+    public TabPanel () {
+        
+    }
+    
     @Override
     public void initialize(Map<String, Object> arg0, URL arg1, Resources arg2)
     {
-        txtFirstName.setText("Vorname");
-        txtLastName.setText("Nachname");
+        txtFirstName.setText("");
+        txtLastName.setText("");
     }
 
 }

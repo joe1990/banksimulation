@@ -1,6 +1,8 @@
 package ch.bfh.ti.pbs.bankaccounts;
 
 import java.io.Serializable;
+
+import ch.bfh.ti.pbs.customers.Customer;
 import ch.bfh.ti.pbs.exceptions.UnderFlowException;
 import ch.bfh.ti.pbs.helpers.DateTime;
 import ch.bfh.ti.pbs.helpers.Decimal;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import ch.bfh.ti.pbs.bankactivities.Transaction;
+import ch.bfh.ti.pbs.customers.Customer;
 import ch.bfh.ti.pbs.exceptions.UnderFlowException;
 import ch.bfh.ti.pbs.helpers.DateTime;
 import ch.bfh.ti.pbs.helpers.Decimal;
@@ -17,6 +18,7 @@ public abstract class BankAccount implements Serializable
     private long accountNumber;
     private Decimal balance;
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
 
     public BankAccount()
     {  
@@ -178,14 +180,14 @@ public abstract class BankAccount implements Serializable
    // Setters & getters 
    public Decimal getBalance() 
    {
-       return balance;
+       return this.balance;
    }
    public long getAccountNumber() 
    {
-       return accountNumber;
+       return this.accountNumber;
    }
    public ArrayList<Transaction> getTransactions() 
    {
-       return transactions;
+       return this.transactions;
    }
 }
