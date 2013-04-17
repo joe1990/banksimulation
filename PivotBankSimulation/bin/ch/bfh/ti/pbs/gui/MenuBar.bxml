@@ -1,0 +1,24 @@
+<MenuBar styles="{backgroundColor:11}"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:content="org.apache.pivot.wtk.content"
+    xmlns="org.apache.pivot.wtk">
+
+	<MenuBar.Item buttonData="File">
+		<Menu>
+			<Menu.Section>
+		    	<Menu.Item action="actQuit">
+		        	<buttonData>
+		           		<content:MenuItemData text="Quit" keyboardShortcut="Q"/>
+		            </buttonData>
+		      	</Menu.Item>
+		        <Menu.Item action="actOpen">
+		        	<buttonData>
+		            	<content:MenuItemData text="Open" keyboardShortcut="O"/>
+		           	</buttonData>
+		       	</Menu.Item>
+		   </Menu.Section>
+		</Menu>
+	</MenuBar.Item>
+</MenuBar>
+
+

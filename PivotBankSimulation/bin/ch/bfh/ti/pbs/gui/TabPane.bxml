@@ -1,0 +1,23 @@
+<TabPane xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:content="org.apache.pivot.wtk.content"
+    xmlns="org.apache.pivot.wtk">
+    <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+        <TabPane.tabData>
+            <content:ButtonData text="Customer"/>
+        </TabPane.tabData>
+        <Border styles="{padding:2}">
+            <Label text="120x90" preferredWidth="120" preferredHeight="90"
+                styles="{horizontalAlignment:'center', verticalAlignment:'center'}"/>
+        </Border>
+    </BoxPane>
+
+    <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+        <TabPane.tabData>
+            <content:ButtonData text="Transactions"/>
+        </TabPane.tabData>
+        <Border styles="{padding:2}">
+            <Label text="240x180" preferredWidth="240" preferredHeight="180"
+                styles="{horizontalAlignment:'center', verticalAlignment:'center'}"/>
+        </Border>
+    </BoxPane>
+</TabPane>

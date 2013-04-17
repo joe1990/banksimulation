@@ -1,0 +1,38 @@
+<bankSimulation:BankSimulationWindow title="Bank Simulation" maximized="true"
+    styles="{padding:{top:0, left:4, bottom:4, right:4}, showWindowControls:false}"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:content="org.apache.pivot.wtk.content"
+    xmlns:bankSimulation="ch.bfh.ti.pbs.gui"
+    xmlns="org.apache.pivot.wtk">
+    
+    <bxml:define>
+        <FileBrowserSheet bxml:id="fbsOpenFile"/>
+    </bxml:define>
+    <actionMappings>
+        <Window.ActionMapping action="actQuit" keyStroke="Q"/>
+        <Window.ActionMapping action="actOpen" keyStroke="O"/>
+    </actionMappings>
+    
+     <TablePane bxml:id="tblpOuter" styles="{verticalSpacing:1, showHorizontalGridLines:true,
+  		horizontalSpacing:1, showVerticalGridLines:true}">
+       	<columns>
+        	<TablePane.Column width="1*"/>
+        </columns>
+       	<TablePane.Row height="-1">
+         	<bxml:include bxml:id="mnbMainMenu" src="MenuBar.bxml"/>
+       	</TablePane.Row>
+        <TablePane.Row height="1*">
+	      	<TablePane bxml:id="tblpInner" styles="{verticalSpacing:1, showHorizontalGridLines:true,
+	        	horizontalSpacing:1, showVerticalGridLines:true}">
+	        	<columns>
+	            	<TablePane.Column width="250"/>
+	               	<TablePane.Column width="1*"/>
+	           	</columns>
+	            <TablePane.Row height="1*">
+	            	<TreeView bxml:id="trvUsers" />
+		    		<bxml:include bxml:id="tbpAccountDetails" src="TabPane.bxml"/>
+	            </TablePane.Row>
+	     	</TablePane>
+        </TablePane.Row>
+	</TablePane>
+</bankSimulation:BankSimulationWindow>

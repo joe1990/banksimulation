@@ -1,0 +1,15 @@
+<TreeView bxml:id="trvUsers"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:content="org.apache.pivot.wtk.content"
+    xmlns="org.apache.pivot.wtk"
+    ComponentListener.parentChanged="trvUsers.expandAll();"
+    >
+    <nodeRenderer>
+        <content:TreeViewNodeRenderer showIcon="true"/>
+    </nodeRenderer>
+
+    <treeData>
+        <content:TreeBranch bxml:id="trbUsers">
+        </content:TreeBranch>
+    </treeData>
+</TreeView>
