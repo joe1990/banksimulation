@@ -62,7 +62,5 @@ public class BankSimulationWindow extends Frame implements Bindable
     public void initialize(Map<String, Object> arg0, URL arg1, Resources arg2)
     {
 
-    }
-    
-    
+    }  
 }

@@ -1,0 +1,7 @@
+<bankSimulation:AlertDialog
+	modal="true" 
+	xmlns:bxml="http://pivot.apache.org/bxml" 
+	xmlns="org.apache.pivot.wtk"
+	xmlns:bankSimulation="ch.bfh.ti.pbs.gui">
+	
+</bankSimulation:AlertDialog>

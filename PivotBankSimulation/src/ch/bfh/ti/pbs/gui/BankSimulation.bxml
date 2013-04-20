@@ -7,6 +7,7 @@
     
     <bxml:define>
         <FileBrowserSheet bxml:id="fbsOpenFile"/>
+        <bxml:include bxml:id="alertDialog" src="AlertDialog.bxml"/>
     </bxml:define>
     <actionMappings>
         <Window.ActionMapping action="actQuit" keyStroke="CMD-Q"/>
