@@ -9,8 +9,8 @@
         <FileBrowserSheet bxml:id="fbsOpenFile"/>
     </bxml:define>
     <actionMappings>
-        <Window.ActionMapping action="actQuit" keyStroke="Q"/>
-        <Window.ActionMapping action="actOpen" keyStroke="O"/>
+        <Window.ActionMapping action="actQuit" keyStroke="CMD-Q"/>
+        <Window.ActionMapping action="actOpen" keyStroke="CMD-O"/>
     </actionMappings>
     
      <TablePane bxml:id="tblpOuter" styles="{verticalSpacing:1, showHorizontalGridLines:true,

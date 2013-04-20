@@ -8,12 +8,12 @@
 			<Menu.Section>
 		    	<Menu.Item action="actQuit">
 		        	<buttonData>
-		           		<content:MenuItemData text="Quit" keyboardShortcut="Q"/>
+		           		<content:MenuItemData text="Quit" keyboardShortcut="CMD-Q"/>
 		            </buttonData>
 		      	</Menu.Item>
 		        <Menu.Item action="actOpen">
 		        	<buttonData>
-		            	<content:MenuItemData text="Open" keyboardShortcut="O"/>
+		            	<content:MenuItemData text="Open" keyboardShortcut="CMD-O"/>
 		           	</buttonData>
 		       	</Menu.Item>
 		   </Menu.Section>

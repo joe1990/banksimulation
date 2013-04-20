@@ -7,26 +7,17 @@
         <TabPane.tabData>
             <content:ButtonData text="Customer"/>
         </TabPane.tabData>
-        <Border>
-	        <TablePane>
-	        	<columns>
-	            	<TablePane.Column width="1*"/>
-	        	</columns>
-	        		
-	        	<TablePane.Row height="1*">
-	        		<BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
-			        	<BoxPane>
-			            	<Label text="Firstname"/>
-			         		<TextInput bxml:id="txtFirstName"/>
-			           	</BoxPane>
-			            <BoxPane>
-			            	<Label text="Lastname"/>
-			         		<TextInput bxml:id="txtLastName"/>
-			            </BoxPane>
-			       	</BoxPane>
-	        	</TablePane.Row>        	
-	        </TablePane>
-		</Border>
+	    <BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
+			<BoxPane>
+				<Label text="Firstname"/>
+			   	<TextInput bxml:id="txtFirstName"/>
+			</BoxPane>
+			<BoxPane>
+				<Label text="Lastname"/>
+			    <TextInput bxml:id="txtLastName"/>
+			</BoxPane>
+			<PushButton bxml:id="psbSaveCustomer" buttonData="Save Customer"/>
+		</BoxPane>
     </BoxPane>
 
     <BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
