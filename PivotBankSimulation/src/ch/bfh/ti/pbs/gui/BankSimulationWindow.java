@@ -40,9 +40,6 @@ import ch.bfh.ti.pbs.bankactivities.InterestRate;
 public class BankSimulationWindow extends Frame implements Bindable 
 {
     @BXML private FileBrowserSheet fbsOpenFile;
-    @BXML private TreeView trvUsers;
-    @BXML private TabPanel tbpAccountDetails;
-    private Bank bank;
 
     public BankSimulationWindow() 
     {
@@ -64,72 +61,8 @@ public class BankSimulationWindow extends Frame implements Bindable
     @Override
     public void initialize(Map<String, Object> arg0, URL arg1, Resources arg2)
     {
-        
-        
-        File workFile = new File("bank.dat");
-        BankReaderWriter.getInstance().setWorkFile(workFile);
-        
-        try
-        {
-            this.bank = BankReaderWriter.getInstance().readFile();
-            this.fillTreeView(bank.Customers);
-        } catch (ClassNotFoundException | IOException e)
-        {
-            e.printStackTrace();
-        }
+
     }
     
-    private void fillTreeView(ArrayList<Customer> customers) {
-        
-        this.trvUsers.getTreeViewSelectionListeners().add(new TreeViewSelectionListener()
-        {
-            
-            @Override
-            public void selectedPathsChanged(TreeView arg0, Sequence<Path> arg1){}
-            
-            @Override
-            public void selectedPathRemoved(TreeView arg0, Path arg1){}
-            
-            @Override
-            public void selectedPathAdded(TreeView arg0, Path arg1){}
-            
-            @Override
-            public void selectedNodeChanged(TreeView arg0, Object arg1)
-            {
-                TreeNode treeNode = (TreeNode) arg0.getSelectedNode();
-                if (arg0.getSelectedNode()  instanceof TreeBranch) {
-                    Customer customer = (Customer) treeNode.getUserData();
-                    tbpAccountDetails.setCustomer(customer);
-                } else {
-                    BankAccount bankAccount = (BankAccount) treeNode.getUserData();
-                    Customer customer = (Customer) treeNode.getParent().getUserData();
-                    tbpAccountDetails.setCustomer(customer);
-                    tbpAccountDetails.setBankAccount(bankAccount);
-                }
-                
-            }
-        });
-        
-        
-        TreeBranch rootBranch = new TreeBranch();
-        for(Customer customer: customers)
-        {
-            TreeBranch customerBranch = new TreeBranch();
-                       
-            customerBranch.setText(customer.getName());
-            customerBranch.setIcon("/ch/bfh/ti/pbs/gui/user.png");
-            customerBranch.setUserData(customer);
-            
-            for(BankAccount account: customer.getAccounts()) {
-                TreeNode accountNode = new TreeNode();
-                accountNode.setText(String.valueOf(account.getAccountNumber()));
-                accountNode.setIcon("/ch/bfh/ti/pbs/gui/bankaccount.png");
-                accountNode.setUserData(account);
-                customerBranch.add(accountNode);
-            }
-            rootBranch.add(customerBranch);
-        }
-        
-        this.trvUsers.setTreeData(rootBranch);
-    }
+    
 }

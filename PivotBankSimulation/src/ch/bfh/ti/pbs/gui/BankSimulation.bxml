@@ -22,17 +22,7 @@
          	<bxml:include bxml:id="mnbMainMenu" src="MenuBar.bxml"/>
        	</TablePane.Row>
         <TablePane.Row height="1*">
-	      	<TablePane bxml:id="tblpInner" styles="{verticalSpacing:1, showHorizontalGridLines:true,
-	        	horizontalSpacing:1, showVerticalGridLines:true, padding:0}">
-	        	<columns>
-	            	<TablePane.Column width="250"/>
-	               	<TablePane.Column width="1*"/>
-	           	</columns>
-	            <TablePane.Row height="1*">
-	            	<TreeView styles="{backgroundColor:'#FFFFFF'}" bxml:id="trvUsers" />
-		    		<bxml:include bxml:id="tbpAccountDetails" src="TabPane.bxml"/>
-	            </TablePane.Row>
-	     	</TablePane>
+	      	<bxml:include bxml:id="tblWindowContent" src="WindowContent.bxml"/>
         </TablePane.Row>
 	</TablePane>
 </bankSimulation:BankSimulationWindow>
