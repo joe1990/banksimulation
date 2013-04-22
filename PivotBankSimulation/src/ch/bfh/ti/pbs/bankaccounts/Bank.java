@@ -2,6 +2,7 @@ package ch.bfh.ti.pbs.bankaccounts;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import ch.bfh.ti.pbs.customers.*;
 
 public class Bank implements Serializable

@@ -1,0 +1,51 @@
+<tabPanel:TabPanel xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:content="org.apache.pivot.wtk.content"
+    xmlns="org.apache.pivot.wtk"
+    xmlns:tabPanel="ch.bfh.ti.pbs.gui"
+    styles="{ activeTabColor:'#CEDDED'}">
+    <BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
+        <TabPane.tabData>
+            <content:ButtonData text="Customer"/>
+        </TabPane.tabData>
+        <Border>
+	        <TablePane>
+	        	<columns>
+	            	<TablePane.Column width="1*"/>
+	        	</columns>
+	        		
+	        	<TablePane.Row height="1*">
+	        		<BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
+			        	<BoxPane>
+			            	<Label text="Firstname"/>
+			         		<TextInput bxml:id="txtFirstName"/>
+			           	</BoxPane>
+			            <BoxPane>
+			            	<Label text="Lastname"/>
+			         		<TextInput bxml:id="txtLastName"/>
+			            </BoxPane>
+			       	</BoxPane>
+	        	</TablePane.Row>        	
+	        </TablePane>
+		</Border>
+    </BoxPane>
+
+    <BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
+        <TabPane.tabData>
+            <content:ButtonData text="Transactions"/>
+        </TabPane.tabData>        
+       	<ScrollPane horizontalScrollBarPolicy="fill_To_Capacity">
+            <TableView bxml:id="tvTransactions" xmlns:collections="org.apache.pivot.collections">
+                <columns>
+                    <TableView.Column name="timestamp" width="100" headerData="Date"/>
+                    <TableView.Column name="amount" width="100" headerData="Amount"/>
+                    <TableView.Column name="balance" width="100" headerData="Balance"/>
+                    <TableView.Column name="remark" width="100" headerData="Remark"/>
+                </columns>                
+            </TableView>
+ 
+            <columnHeader>
+                <TableViewHeader tableView="$tvTransactions"/>
+            </columnHeader>
+        </ScrollPane>
+    </BoxPane>
+</tabPanel:TabPanel>

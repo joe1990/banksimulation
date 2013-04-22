@@ -1,7 +1,7 @@
 <bankSimulation:WindowContent xmlns:bxml="http://pivot.apache.org/bxml"
     xmlns:content="org.apache.pivot.wtk.content"
-    xmlns="org.apache.pivot.wtk"
-    xmlns:bankSimulation="ch.bfh.ti.pbs.gui"
+    xmlns="org.apache.pivot.wtk"    
+    xmlns:bankSimulation="ch.bfh.ti.pbs.gui"    
    	styles="{verticalSpacing:1, showHorizontalGridLines:true,
 	 	horizontalSpacing:1, showVerticalGridLines:true, padding:0}">
 	    	<columns>
@@ -32,18 +32,37 @@
 				        <TabPane.tabData>
 				            <content:ButtonData text="Transactions"/>
 				        </TabPane.tabData>
-				       	<ScrollPane>
-				            <TableView bxml:id="tableView">
+				       	<ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
+				       	  <view>
+				            <TableView bxml:id="tvTransactions" selectMode="SINGLE">
 				                <columns>
-				                    <TableView.Column name="clmData" width="100" headerData="Date"/>
-				                    <TableView.Column name="clmAmount" width="100" headerData="Amount"/>
-				                    <TableView.Column name="clmBalance" width="100" headerData="Balance"/>
-				                    <TableView.Column name="clmRemark" width="100" headerData="Remark"/>
+				                    <TableView.Column name="timestamp" width="200" headerData="Date">
+				                   		<cellRenderer>
+                                   			<content:TableViewDateCellRenderer>
+												<dateFormat>dd.MM.yyyy</dateFormat>
+											</content:TableViewDateCellRenderer>
+										</cellRenderer>
+									</TableView.Column>
+				                    <TableView.Column name="amount" width="100" headerData="Amount">
+				                    	<cellRenderer>
+                            				<content:TableViewNumberCellRenderer>
+                                				<numberFormat>#0.00</numberFormat>
+                            				</content:TableViewNumberCellRenderer>
+                        				</cellRenderer>
+                        			</TableView.Column> 	
+				                    <TableView.Column name="balance" width="100" headerData="Balance">
+				                    	<cellRenderer>
+                            				<content:TableViewNumberCellRenderer>
+                                				<numberFormat>#0.00</numberFormat>
+                            				</content:TableViewNumberCellRenderer>
+                        				</cellRenderer>
+                        			</TableView.Column> 				                    
+				                    <TableView.Column name="remark" width="100" headerData="Remark"/>
 				                </columns>
 				            </TableView>
-				 
+				          </view>
 				            <columnHeader>
-				                <TableViewHeader tableView="$tableView"/>
+				                <TableViewHeader tableView="$tvTransactions"/>
 				            </columnHeader>
 				        </ScrollPane>
 				    </BoxPane>
