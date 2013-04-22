@@ -1,71 +1,90 @@
 <bankSimulation:WindowContent xmlns:bxml="http://pivot.apache.org/bxml"
-    xmlns:content="org.apache.pivot.wtk.content"
-    xmlns="org.apache.pivot.wtk"    
-    xmlns:bankSimulation="ch.bfh.ti.pbs.gui"    
-   	styles="{verticalSpacing:1, showHorizontalGridLines:true,
+	xmlns:content="org.apache.pivot.wtk.content" xmlns="org.apache.pivot.wtk"
+	xmlns:bankSimulation="ch.bfh.ti.pbs.gui"
+	styles="{verticalSpacing:1, showHorizontalGridLines:true,
 	 	horizontalSpacing:1, showVerticalGridLines:true, padding:0}">
-	    	<columns>
-	        	<TablePane.Column width="250"/>
-	           	<TablePane.Column width="1*"/>
-	       	</columns>
-	        <TablePane.Row height="1*">
-	        	<TreeView styles="{backgroundColor:'#FFFFFF'}" bxml:id="trvUsers" />
-	        	<TabPane styles="{ activeTabColor:'#CEDDED'}" bxml:id="tbpAccountDetails">
-	        		<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
-				        <TabPane.tabData>
-				            <content:ButtonData text="Customer"/>
-				        </TabPane.tabData>
-					    <BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
-							<BoxPane>
-								<Label text="Firstname"/>
-							   	<TextInput bxml:id="txtFirstName"/>
-							</BoxPane>
-							<BoxPane>
-								<Label text="Lastname"/>
-							    <TextInput bxml:id="txtLastName"/>
-							</BoxPane>
-							<PushButton bxml:id="psbSaveCustomer" buttonData="Save Customer"/>
+	<columns>
+		<TablePane.Column width="250" />
+		<TablePane.Column width="1*" />
+	</columns>
+	<TablePane.Row height="1*">
+		<TreeView styles="{backgroundColor:'#FFFFFF'}" bxml:id="trvUsers" />
+		<TabPane styles="{ activeTabColor:'#CEDDED'}" bxml:id="tbpAccountDetails">
+			<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
+				<TabPane.tabData>
+					<content:ButtonData text="Customer" />
+				</TabPane.tabData>
+				<BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
+					<BoxPane>
+						<Label text="Firstname" />
+						<TextInput bxml:id="txtFirstName" />
+					</BoxPane>
+					<BoxPane>
+						<Label text="Lastname" />
+						<TextInput bxml:id="txtLastName" />
+					</BoxPane>
+					<PushButton bxml:id="psbSaveCustomer" buttonData="Save Customer" />
+				</BoxPane>
+			</BoxPane>
+
+			<FillPane>
+				<TabPane.tabData>
+					<content:ButtonData text="Transactions" />
+				</TabPane.tabData>
+				<TablePane
+					styles="{verticalSpacing:1, showHorizontalGridLines:true, horizontalSpacing:1, showVerticalGridLines:true}">
+					<columns>
+						<TablePane.Column width="1*" />
+					</columns>
+					<TablePane.Row height="1*">
+						<ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
+							<view>
+								<TableView bxml:id="tvTransactions" selectMode="SINGLE">
+									<columns>
+										<TableView.Column name="timestamp" width="200"
+											headerData="Date">
+											<cellRenderer>
+												<content:TableViewDateCellRenderer>
+													<dateFormat>dd.MM.yyyy</dateFormat>
+												</content:TableViewDateCellRenderer>
+											</cellRenderer>
+										</TableView.Column>
+										<TableView.Column name="amount" width="100"
+											headerData="Amount">
+											<cellRenderer>
+												<content:TableViewNumberCellRenderer>
+													<numberFormat>#0.00</numberFormat>
+												</content:TableViewNumberCellRenderer>
+											</cellRenderer>
+										</TableView.Column>
+										<TableView.Column name="balance" width="100"
+											headerData="Balance">
+											<cellRenderer>
+												<content:TableViewNumberCellRenderer>
+													<numberFormat>#0.00</numberFormat>
+												</content:TableViewNumberCellRenderer>
+											</cellRenderer>
+										</TableView.Column>
+										<TableView.Column name="remark" width="100"
+											headerData="Remark" />
+									</columns>
+								</TableView>
+							</view>
+							<columnHeader>
+								<TableViewHeader tableView="$tvTransactions" />
+							</columnHeader>
+						</ScrollPane>
+					</TablePane.Row>
+					<TablePane.Row height="28">
+						<BoxPane
+							styles="{horizontalAlignment:'right', verticalAlignment:'bottom'}">
+							<!-- new transaction-->
+							<PushButton bxml:id="newTrans" buttonData="Neue Transaktion" />
 						</BoxPane>
-				    </BoxPane>
-				
-				    <BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
-				        <TabPane.tabData>
-				            <content:ButtonData text="Transactions"/>
-				        </TabPane.tabData>
-				       	<ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
-				       	  <view>
-				            <TableView bxml:id="tvTransactions" selectMode="SINGLE">
-				                <columns>
-				                    <TableView.Column name="timestamp" width="200" headerData="Date">
-				                   		<cellRenderer>
-                                   			<content:TableViewDateCellRenderer>
-												<dateFormat>dd.MM.yyyy</dateFormat>
-											</content:TableViewDateCellRenderer>
-										</cellRenderer>
-									</TableView.Column>
-				                    <TableView.Column name="amount" width="100" headerData="Amount">
-				                    	<cellRenderer>
-                            				<content:TableViewNumberCellRenderer>
-                                				<numberFormat>#0.00</numberFormat>
-                            				</content:TableViewNumberCellRenderer>
-                        				</cellRenderer>
-                        			</TableView.Column> 	
-				                    <TableView.Column name="balance" width="100" headerData="Balance">
-				                    	<cellRenderer>
-                            				<content:TableViewNumberCellRenderer>
-                                				<numberFormat>#0.00</numberFormat>
-                            				</content:TableViewNumberCellRenderer>
-                        				</cellRenderer>
-                        			</TableView.Column> 				                    
-				                    <TableView.Column name="remark" width="100" headerData="Remark"/>
-				                </columns>
-				            </TableView>
-				          </view>
-				            <columnHeader>
-				                <TableViewHeader tableView="$tvTransactions"/>
-				            </columnHeader>
-				        </ScrollPane>
-				    </BoxPane>
-	        	</TabPane>
-	       	</TablePane.Row>
+					</TablePane.Row>
+				</TablePane>
+			</FillPane>
+		</TabPane>
+	</TablePane.Row>
+
 </bankSimulation:WindowContent>
