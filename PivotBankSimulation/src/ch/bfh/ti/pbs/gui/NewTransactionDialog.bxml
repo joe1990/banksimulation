@@ -1,0 +1,16 @@
+<bankSimulation:NewTransactionDialog
+	modal="true" 
+	xmlns:bxml="http://pivot.apache.org/bxml" 
+	xmlns="org.apache.pivot.wtk"
+	xmlns:bankSimulation="ch.bfh.ti.pbs.gui" title="Add new transaction">
+	<BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
+		<BoxPane>
+			<Label text="Amount"/>
+			<TextInput bxml:id="txtAmount"/>
+		</BoxPane>
+		<BoxPane
+			styles="{horizontalAlignment:'right', verticalAlignment:'bottom'}">
+			<PushButton bxml:id="psbSaveTransaction" buttonData="Save Transaction" />							
+		</BoxPane>
+	</BoxPane>
+</bankSimulation:NewTransactionDialog>

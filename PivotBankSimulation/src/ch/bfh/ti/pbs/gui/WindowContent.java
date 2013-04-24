@@ -5,7 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StreamCorruptedException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Scanner;
 //import org.apache.pivot.collections.ArrayList;
 import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.Bindable;
@@ -20,7 +24,10 @@ import ch.bfh.ti.pbs.bankaccounts.Bank;
 import ch.bfh.ti.pbs.bankaccounts.BankAccount;
 import ch.bfh.ti.pbs.bankactivities.*;
 import ch.bfh.ti.pbs.customers.Customer;
+import ch.bfh.ti.pbs.exceptions.UnderFlowException;
 import ch.bfh.ti.pbs.helpers.BankReaderWriter;
+import ch.bfh.ti.pbs.helpers.DateTime;
+import ch.bfh.ti.pbs.helpers.Decimal;
 
 public class WindowContent extends TablePane implements Bindable
 {
@@ -29,19 +36,28 @@ public class WindowContent extends TablePane implements Bindable
 	@BXML
 	private TextInput txtLastName;
 	@BXML
+	private Label lblFirstName;
+	@BXML
+	private Label lblLastName;
+	@BXML
 	private PushButton psbSaveCustomer;
 	@BXML
 	private PushButton psbNewTransaction;
 	@BXML
 	private TreeView trvUsers;
 	@BXML
-	private NewTransaction alertDialog;
-	@BXML
 	private TableView tvTransactions;
+	@BXML
+	private ScrollPane scpTransactions;
+	@BXML
+	private NewTransactionDialog dlgNewTransaction;
 
 	private Customer customer;
 	private BankAccount bankAccount;
 	private Bank bank;
+	
+	private boolean isCustomerContentInitialized = false;
+	private boolean isTransactionContentInitialized = false;
 
 	public WindowContent()
 	{
@@ -67,12 +83,16 @@ public class WindowContent extends TablePane implements Bindable
         setTreeViewActions();
         setTableViewActions();
         setTransactions(bankAccount);
-        setSaveCustomerActions();
 	}
 
 	public void setBankAccount(BankAccount bankAccount)
 	{
 		this.bankAccount = bankAccount;
+	}
+	
+	public void setNewTransactionDialog(NewTransactionDialog dlgNewTransaction)
+	{
+	    this.dlgNewTransaction = dlgNewTransaction;
 	}
 
 	private void setTreeViewActions()
@@ -104,6 +124,8 @@ public class WindowContent extends TablePane implements Bindable
 							customer = (Customer) treeNode.getUserData();
 							txtFirstName.setText(customer.getFirstname());
 							txtLastName.setText(customer.getLastname());
+							setSaveCustomerActions();
+							deinitializeWindowContentTransaction();
 						} else if (arg0.getSelectedNode() instanceof TreeNode) {
 							bankAccount = (BankAccount) treeNode.getUserData();
 							customer = (Customer) treeNode.getParent()
@@ -111,9 +133,45 @@ public class WindowContent extends TablePane implements Bindable
 							txtFirstName.setText(customer.getFirstname());
 							txtLastName.setText(customer.getLastname());
 							setTransactions(bankAccount);
+							setSaveCustomerActions();
+							setSaveTransactionActions();
+							if (!isTransactionContentInitialized)
+	                        {
+							    initializeWindowContentTransaction();
+	                        }
 						}
+						
+						if (!isCustomerContentInitialized)
+						{
+						    initializeWindowContentCustomer();
+						}
+						
 					}
 				});
+	}
+	
+	private void initializeWindowContentTransaction()
+	{
+	    psbNewTransaction.setVisible(true);
+	    scpTransactions.setVisible(true);
+	    isTransactionContentInitialized = true;
+	}
+	
+	private void deinitializeWindowContentTransaction()
+	{
+	    psbNewTransaction.setVisible(false);
+	    scpTransactions.setVisible(false);
+        isTransactionContentInitialized = false;
+	}
+	
+	private void initializeWindowContentCustomer()
+	{
+	    lblFirstName.setVisible(true);
+	    txtFirstName.setVisible(true);
+	    lblLastName.setVisible(true);
+	    txtLastName.setVisible(true);
+	    psbSaveCustomer.setVisible(true);
+	    isCustomerContentInitialized = true;
 	}
 
 	private void setTableViewActions()
@@ -123,7 +181,7 @@ public class WindowContent extends TablePane implements Bindable
 					public void selectedRowChanged(TableView tableView,
 							Object previousSelectedRow)
 					{
-						//System.out.println("selectedRowChanged");
+					    
 					}
 				});
 	};
@@ -137,28 +195,30 @@ public class WindowContent extends TablePane implements Bindable
 					{
 						customer.setLastname(txtLastName.getText());
 						customer.setFirstname(txtFirstName.getText());
-						try {
-							BankReaderWriter.getInstance().writeFile();
-							fillTreeView(bank.Customers);
-						} catch (IOException e) {
-
-							e.printStackTrace();
-						}
+						fillTreeView(bank.Customers);
 					}
 				});
 	}
 	
-	private void setNewTransactionActions()
+	private void setSaveTransactionActions()
 	{
-	    psbNewTransaction.getButtonPressListeners().add(
-	            new ButtonPressListener() {
-                    @Override
-                    public void buttonPressed(Button arg0)
-                    {
-                        
-                        
-                    }
-	            });
+	    dlgNewTransaction.getSaveTransactionButton().getButtonPressListeners().add(new ButtonPressListener() {
+            @Override
+            public void buttonPressed(Button arg0)
+            {
+                saveTransaction();
+            }
+        });
+	}
+	
+	public void saveBankToFile() throws FileNotFoundException, IOException
+	{
+	    BankReaderWriter.getInstance().writeFile();
+	}
+	
+	public PushButton getNewTransactionButton()
+	{
+	    return psbNewTransaction;
 	}
 
 	private void fillTreeView(ArrayList<Customer> customers)
@@ -187,15 +247,52 @@ public class WindowContent extends TablePane implements Bindable
 
 	private void setTransactions(BankAccount account)
 	{
-		if (bankAccount == null)
+		if (bankAccount == null) {
 			return;
+		}
+		
 		List<Transaction> trans = new org.apache.pivot.collections.ArrayList<Transaction>();
 		for (Transaction t : account.getTransactions()) {
 			trans.add(t);
 		}
 		tvTransactions.clear();
-		if (trans != null)
-			tvTransactions.setTableData(trans);
+		if (trans != null) {
+		    tvTransactions.setTableData(trans);
+		}
 	};
 
+	private void saveTransaction()
+    {
+        Scanner scanner = new Scanner(dlgNewTransaction.getAmount());  
+        if (scanner.hasNextDouble()) {  
+            double amount = scanner.nextDouble();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Calendar currentDate = Calendar.getInstance();
+            String currentDateString = dateFormat.format(currentDate.getTime());
+            DateTime currentDateTime = new DateTime(currentDateString);
+            
+            if (amount > 0) {
+                try
+                {
+                    bankAccount.deposit(currentDateTime, new Decimal(amount), "");
+                    dlgNewTransaction.reset();
+                    dlgNewTransaction.close();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            } else if (amount < 0) {
+                amount = Math.abs(amount);
+                try
+                {
+                    bankAccount.withdraw(currentDateTime, new Decimal(amount), "");
+                    dlgNewTransaction.reset();
+                    dlgNewTransaction.close();
+                } catch (UnderFlowException e){
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            Alert.alert(MessageType.INFO, "Please give a correct value.", BankSimulationWindow.getActiveWindow());    
+        }
+    }
 }

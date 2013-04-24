@@ -5,7 +5,7 @@
    	styles="{verticalSpacing:1, showHorizontalGridLines:true,
 	 	horizontalSpacing:1, showVerticalGridLines:true, padding:0}">
 	    	<columns>
-	        	<TablePane.Column width="250"/>
+	        	<TablePane.Column width="200"/>
 	           	<TablePane.Column width="1*"/>
 	       	</columns>
 	        <TablePane.Row height="1*">
@@ -17,22 +17,35 @@
 					</columns>
 					<TablePane.Row height="1*">
 			        	<TabPane styles="{ activeTabColor:'#CEDDED'}" bxml:id="tbpAccountDetails">
-			        		<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
-						        <TabPane.tabData>
-						            <content:ButtonData text="Customer"/>
-						        </TabPane.tabData>
-							    <BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
-									<BoxPane>
-										<Label text="Firstname"/>
-									   	<TextInput bxml:id="txtFirstName"/>
+			        		<TablePane styles="{verticalSpacing:2, horizontalSpacing:2, 
+								showHorizontalGridLines:false, showVerticalGridLines:false}">
+								<TabPane.tabData>
+								    	<content:ButtonData text="Customer"/>
+								    </TabPane.tabData>
+								<columns>
+									<TablePane.Column width="1*" />
+								</columns>
+								<TablePane.Row height="1*">
+					        		<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
+								        
+									    <BoxPane orientation="vertical" styles="{padding:6, spacing:8, fill:true}">
+											<BoxPane>
+												<Label bxml:id="lblFirstName" text="Firstname" visible="false"/>
+											   	<TextInput bxml:id="txtFirstName" visible="false"/>
+											</BoxPane>
+											<BoxPane>
+												<Label bxml:id="lblLastName" text="Lastname" visible="false"/>
+											    <TextInput bxml:id="txtLastName" visible="false"/>
+											</BoxPane>
+										</BoxPane>
 									</BoxPane>
-									<BoxPane>
-										<Label text="Lastname"/>
-									    <TextInput bxml:id="txtLastName"/>
+								</TablePane.Row>
+								<TablePane.Row height="30">
+									<BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'bottom', padding:2}">
+										<PushButton bxml:id="psbSaveCustomer" buttonData="Save Customer" visible="false"/>
 									</BoxPane>
-								</BoxPane>
-						    </BoxPane>
-						
+								</TablePane.Row>
+							</TablePane>
 						    <FillPane>
 						        <TabPane.tabData>
 						          <content:ButtonData text="Transactions" />
@@ -43,9 +56,9 @@
 						            <TablePane.Column width="1*" />
 						          </columns>
 						          <TablePane.Row height="1*">
-						            <ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
+						            <ScrollPane bxml:id="scpTransactions" visible="false" horizontalScrollBarPolicy="fill_to_capacity">
 						              <view>
-						                <TableView bxml:id="tvTransactions" selectMode="SINGLE">
+						                <TableView bxml:id="tvTransactions" selectMode="SINGLE" >
 						                  <columns>
 						                    <TableView.Column name="timestamp" width="200"
 						                      headerData="Date">
@@ -85,17 +98,12 @@
 						            <BoxPane
 						              styles="{horizontalAlignment:'right', verticalAlignment:'bottom'}">
 						              <!-- new transaction-->
-						              <PushButton bxml:id="psbNewTransaction" buttonData="New Transaction" />
+						              <PushButton bxml:id="psbNewTransaction" buttonData="New Transaction" visible="false"/>
 					             </BoxPane> 
 					         	</TablePane.Row>
 								</TablePane>
 							</FillPane> 
 			        	</TabPane>
-					</TablePane.Row>
-					<TablePane.Row height="30">
-						<BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'bottom', padding:2}">
-							<PushButton bxml:id="psbSaveCustomer" buttonData="Save Customer"/>
-						</BoxPane>
 					</TablePane.Row>
 				</TablePane>
 	       	</TablePane.Row>

@@ -84,13 +84,14 @@ public class BankReaderWriter
         DateTime startDate2 = new DateTime(2013, 7, 1, 12,00,00);
         DateTime endDate2   = new DateTime(2013,12,31, 23,59,59);
 
-        addOneTransactionPerDay(A.getAccount(0), startDate1, endDate1, new Decimal( 100.0));
-        addOneTransactionPerDay(A.getAccount(0), startDate2, endDate2, new Decimal(-100.0));
-        addOneTransactionPerDay(B.getAccount(0), startDate1, endDate1, new Decimal( 100.0));
-        addOneTransactionPerDay(B.getAccount(0), startDate2, endDate2, new Decimal(-100.0));
-        addOneTransactionPerDay(C.getAccount(0), startDate1, endDate1, new Decimal( 100.0));
-        addOneTransactionPerDay(C.getAccount(0), startDate2, endDate2, new Decimal(-100.0));
-              
+        
+        //addOneTransactionPerDay(A.getAccount(0), startDate1, endDate1, new Decimal( 100.0));
+        //addOneTransactionPerDay(A.getAccount(0), startDate2, endDate2, new Decimal(-100.0));
+        //addOneTransactionPerDay(B.getAccount(0), startDate1, endDate1, new Decimal( 100.0));
+        //addOneTransactionPerDay(B.getAccount(0), startDate2, endDate2, new Decimal(-100.0));
+        //addOneTransactionPerDay(C.getAccount(0), startDate1, endDate1, new Decimal( 100.0));
+        //addOneTransactionPerDay(C.getAccount(0), startDate2, endDate2, new Decimal(-100.0));
+             
         A.getAccount(0).applyInterest(new DateTime(2013, 12, 31), false);
         B.getAccount(0).applyInterest(new DateTime(2013, 12, 31), false);
         C.getAccount(0).applyInterest(new DateTime(2013, 12, 31), false);

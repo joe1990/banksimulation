@@ -1,6 +1,7 @@
 package ch.bfh.ti.pbs.helpers;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -16,6 +17,12 @@ public class DateTime implements Cloneable, Serializable, Comparable<DateTime>
     public DateTime() 
     {  
         gc = new GregorianCalendar();
+    }
+    
+    public DateTime(String date)
+    {
+        gc = new GregorianCalendar(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(5, 7)) - 1, 
+                Integer.parseInt(date.substring(8, 10)), Integer.parseInt(date.substring(11, 13)), Integer.parseInt(date.substring(14, 16)), Integer.parseInt(date.substring(17, 19)));
     }
     
     public DateTime(int year, int month, int day)

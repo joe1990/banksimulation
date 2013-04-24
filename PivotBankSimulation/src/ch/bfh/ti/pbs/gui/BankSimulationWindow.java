@@ -20,6 +20,8 @@ import org.apache.pivot.collections.Sequence.Tree.Path;
 import org.apache.pivot.util.Resources;
 import org.apache.pivot.wtk.Action;
 import org.apache.pivot.wtk.Alert;
+import org.apache.pivot.wtk.Button;
+import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.Component;
 import org.apache.pivot.wtk.FileBrowserSheet;
 import org.apache.pivot.wtk.Frame;
@@ -49,6 +51,7 @@ public class BankSimulationWindow extends Frame implements Bindable
 {
     @BXML private FileBrowserSheet fbsOpenFile;
     @BXML private WindowContent tblWindowContent;
+    @BXML private NewTransactionDialog dlgNewTransaction;
 
     public BankSimulationWindow() 
     {
@@ -88,11 +91,15 @@ public class BankSimulationWindow extends Frame implements Bindable
         Action.getNamedActions().put("actQuit", new Action() {
             @Override
             public void perform(Component source) {
+                try
+                {
+                    tblWindowContent.saveBankToFile();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
                 System.exit(0);
             }
         });
-        
-        
     }
     
     @Override
@@ -103,11 +110,24 @@ public class BankSimulationWindow extends Frame implements Bindable
             File bankFile = new File("bank.dat");
             tblWindowContent.setWindowsOutput(bankFile);
             BankSimulationWindow.this.setTitle("Bank Simulation 3: " + bankFile.getPath());
+            tblWindowContent.setNewTransactionDialog(dlgNewTransaction);
+            
         } catch (ClassNotFoundException | IOException e)
         {
-            Alert.alert(MessageType.ERROR, "Cannot load .dat-File. Wrong file format", BankSimulationWindow.this);
             BankSimulationWindow.this.setTitle("Bank Simulation 3: ");
             e.printStackTrace();
         }
+        setNewTransactionAction();
     }  
+    
+    private void setNewTransactionAction() 
+    {
+        tblWindowContent.getNewTransactionButton().getButtonPressListeners().add(new ButtonPressListener() {
+            @Override
+            public void buttonPressed(Button arg0)
+            {
+                dlgNewTransaction.open(BankSimulationWindow.this);  
+            }
+        });
+    }
 }
