@@ -16,7 +16,8 @@ public class BankSimulation implements Application
     {
         BXMLSerializer bxmlSerializer = new BXMLSerializer();
         window = (Window)bxmlSerializer.readObject(BankSimulation.class, "BankSimulation.bxml");
-        
+        window.setMaximumHeight(400);
+
         window.open(display);
     }
  

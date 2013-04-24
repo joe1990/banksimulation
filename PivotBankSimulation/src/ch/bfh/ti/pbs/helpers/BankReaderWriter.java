@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 
 import ch.bfh.ti.pbs.bankaccounts.Bank;
 import ch.bfh.ti.pbs.bankaccounts.BankAccount;
@@ -41,7 +42,7 @@ public class BankReaderWriter
         this.workFile = workFile;
     }
     
-    public Bank readFile() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public Bank readFile() throws FileNotFoundException, IOException, ClassNotFoundException, StreamCorruptedException {
         
         if (this.workFile.exists()) {
             inputStream = new ObjectInputStream(new FileInputStream(this.workFile));

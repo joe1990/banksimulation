@@ -7,7 +7,7 @@ import org.apache.pivot.collections.Map;
 import org.apache.pivot.util.Resources;
 import org.apache.pivot.wtk.Dialog;
 
-public class AlertDialog extends Dialog implements Bindable
+public class NewTransaction extends Dialog implements Bindable
 {
 
     @Override

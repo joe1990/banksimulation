@@ -33,47 +33,66 @@
 								</BoxPane>
 						    </BoxPane>
 						
-						    <BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'top'}">
+						    <FillPane>
 						        <TabPane.tabData>
-						            <content:ButtonData text="Transactions"/>
+						          <content:ButtonData text="Transactions" />
 						        </TabPane.tabData>
-						       	<ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
-						       	  <view>
-						            <TableView bxml:id="tvTransactions" selectMode="SINGLE">
-						                <columns>
-						                    <TableView.Column name="timestamp" width="200" headerData="Date">
-						                   		<cellRenderer>
-		                                   			<content:TableViewDateCellRenderer>
-														<dateFormat>dd.MM.yyyy</dateFormat>
-													</content:TableViewDateCellRenderer>
-												</cellRenderer>
-											</TableView.Column>
-						                    <TableView.Column name="amount" width="100" headerData="Amount">
-						                    	<cellRenderer>
-		                            				<content:TableViewNumberCellRenderer>
-		                                				<numberFormat>#0.00</numberFormat>
-		                            				</content:TableViewNumberCellRenderer>
-		                        				</cellRenderer>
-		                        			</TableView.Column> 	
-						                    <TableView.Column name="balance" width="100" headerData="Balance">
-						                    	<cellRenderer>
-		                            				<content:TableViewNumberCellRenderer>
-		                                				<numberFormat>#0.00</numberFormat>
-		                            				</content:TableViewNumberCellRenderer>
-		                        				</cellRenderer>
-		                        			</TableView.Column> 				                    
-						                    <TableView.Column name="remark" width="100" headerData="Remark"/>
-						                </columns>
-						            </TableView>
-						          </view>
-						            <columnHeader>
-						                <TableViewHeader tableView="$tvTransactions"/>
-						            </columnHeader>
-						        </ScrollPane>
-						    </BoxPane>
+						        <TablePane
+						          styles="{verticalSpacing:1, showHorizontalGridLines:true, horizontalSpacing:1, showVerticalGridLines:true}">
+						          <columns>
+						            <TablePane.Column width="1*" />
+						          </columns>
+						          <TablePane.Row height="1*">
+						            <ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
+						              <view>
+						                <TableView bxml:id="tvTransactions" selectMode="SINGLE">
+						                  <columns>
+						                    <TableView.Column name="timestamp" width="200"
+						                      headerData="Date">
+						                      <cellRenderer>
+						                        <content:TableViewDateCellRenderer>
+						                          <dateFormat>dd.MM.yyyy</dateFormat>
+						                        </content:TableViewDateCellRenderer>
+						                      </cellRenderer>
+						                    </TableView.Column>
+						                    <TableView.Column name="amount" width="100"
+						                      headerData="Amount">
+						                      <cellRenderer>
+						                        <content:TableViewNumberCellRenderer>
+						                          <numberFormat>#0.00</numberFormat>
+						                        </content:TableViewNumberCellRenderer>
+						                      </cellRenderer>
+						                    </TableView.Column>
+						                   <TableView.Column name="balance" width="100"
+						                      headerData="Balance">
+						                     <cellRenderer>
+						                        <content:TableViewNumberCellRenderer>
+						                          <numberFormat>#0.00</numberFormat>
+						                        </content:TableViewNumberCellRenderer>
+						                      </cellRenderer>
+						                    </TableView.Column>
+						                    <TableView.Column name="remark" width="100"
+						                      headerData="Remark" />
+						                  </columns>
+						                </TableView>
+						              </view>
+						              <columnHeader>
+						                <TableViewHeader tableView="$tvTransactions" />
+						              </columnHeader>
+						            </ScrollPane>
+						         </TablePane.Row>
+						          <TablePane.Row height="30">
+						            <BoxPane
+						              styles="{horizontalAlignment:'right', verticalAlignment:'bottom'}">
+						              <!-- new transaction-->
+						              <PushButton bxml:id="psbNewTransaction" buttonData="New Transaction" />
+					             </BoxPane> 
+					         	</TablePane.Row>
+								</TablePane>
+							</FillPane> 
 			        	</TabPane>
 					</TablePane.Row>
-					<TablePane.Row height="25">
+					<TablePane.Row height="30">
 						<BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'bottom', padding:2}">
 							<PushButton bxml:id="psbSaveCustomer" buttonData="Save Customer"/>
 						</BoxPane>

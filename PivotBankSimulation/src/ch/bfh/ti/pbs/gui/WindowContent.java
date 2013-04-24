@@ -3,6 +3,7 @@ package ch.bfh.ti.pbs.gui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.net.URL;
 import java.util.ArrayList;
 //import org.apache.pivot.collections.ArrayList;
@@ -30,9 +31,11 @@ public class WindowContent extends TablePane implements Bindable
 	@BXML
 	private PushButton psbSaveCustomer;
 	@BXML
+	private PushButton psbNewTransaction;
+	@BXML
 	private TreeView trvUsers;
 	@BXML
-	private AlertDialog alertDialog;
+	private NewTransaction alertDialog;
 	@BXML
 	private TableView tvTransactions;
 
@@ -48,23 +51,23 @@ public class WindowContent extends TablePane implements Bindable
 	@Override
 	public void initialize(Map<String, Object> arg0, URL arg1, Resources arg2)
 	{
-		File workFile = new File("bank.dat");
-		BankReaderWriter.getInstance().setWorkFile(workFile);
+		
+	}
+	
+	public void setWindowsOutput(File bankFile) throws FileNotFoundException, IOException, ClassNotFoundException, StreamCorruptedException
+	{
+	    BankReaderWriter.getInstance().setWorkFile(bankFile);
 
-		try {
-			this.bank = BankReaderWriter.getInstance().readFile();
-			this.fillTreeView(bank.Customers);
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
+        this.bank = BankReaderWriter.getInstance().readFile();
+        this.fillTreeView(bank.Customers);
 
-		txtFirstName.setText("");
-		txtLastName.setText("");
+        txtFirstName.setText("");
+        txtLastName.setText("");
 
-		setTreeViewActions();
-		setTableViewActions();
-		setTransactions(bankAccount);
-		setSaveCustomerActions();
+        setTreeViewActions();
+        setTableViewActions();
+        setTransactions(bankAccount);
+        setSaveCustomerActions();
 	}
 
 	public void setBankAccount(BankAccount bankAccount)
@@ -143,6 +146,19 @@ public class WindowContent extends TablePane implements Bindable
 						}
 					}
 				});
+	}
+	
+	private void setNewTransactionActions()
+	{
+	    psbNewTransaction.getButtonPressListeners().add(
+	            new ButtonPressListener() {
+                    @Override
+                    public void buttonPressed(Button arg0)
+                    {
+                        
+                        
+                    }
+	            });
 	}
 
 	private void fillTreeView(ArrayList<Customer> customers)
