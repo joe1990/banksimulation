@@ -1,10 +1,10 @@
-<bankSimulation:BankSimulationWindow title="Bank Simulation" maximized="true"
+<bankSimulation:BankSimulationWindow title="Bank Simulation 3: bank.dat" maximized="true"
+	icon="@bank.png" 
     styles="{padding:{top:1, left:1, bottom:1, right:1}, showWindowControls:false}"
     xmlns:bxml="http://pivot.apache.org/bxml"
     xmlns:content="org.apache.pivot.wtk.content"
     xmlns:bankSimulation="ch.bfh.ti.pbs.gui"
     xmlns="org.apache.pivot.wtk">
-    
     <bxml:define>
         <FileBrowserSheet bxml:id="fbsOpenFile"/>
         <bxml:include bxml:id="alertDialog" src="AlertDialog.bxml"/>

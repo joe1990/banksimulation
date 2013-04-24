@@ -56,11 +56,13 @@ public class BankSimulationWindow extends Frame implements Bindable
                 System.exit(0);
             }
         });
+        
+        
     }
     
     @Override
     public void initialize(Map<String, Object> arg0, URL arg1, Resources arg2)
     {
-
+        
     }  
 }
