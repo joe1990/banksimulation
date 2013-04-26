@@ -251,6 +251,7 @@ public class WindowContent extends TablePane implements Bindable
                     bankAccount.withdraw(currentDateTime, new Decimal(amount), "");
                     dlgNewTransaction.reset();
                     dlgNewTransaction.close();
+                    setTransactions(bankAccount);
                 } catch (UnderFlowException e){
                     e.printStackTrace();
                 }
