@@ -2,6 +2,8 @@ package ch.bfh.ti.pbs.helpers;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  * The Decimal class wraps the BigDecimal number class and provides an additional toString
@@ -65,7 +67,9 @@ public class Decimal implements Serializable, Comparable<Decimal>
    
     public String toString()
     {
-        return numBigDec.toString() +" (" + numDouble + ")";
+        DecimalFormat df = new DecimalFormat("#0.00");
+        String formated = df.format(numBigDec);
+        return formated;
     }   
     public String toString(int totalWidth, int numDigitsAfter)
     {  

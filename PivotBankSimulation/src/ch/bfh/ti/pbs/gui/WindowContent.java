@@ -36,10 +36,6 @@ public class WindowContent extends TablePane implements Bindable
 	@BXML
 	private TextInput txtLastName;
 	@BXML
-	private Label lblFirstName;
-	@BXML
-	private Label lblLastName;
-	@BXML
 	private PushButton psbSaveCustomer;
 	@BXML
 	private PushButton psbNewTransaction;
@@ -48,16 +44,13 @@ public class WindowContent extends TablePane implements Bindable
 	@BXML
 	private TableView tvTransactions;
 	@BXML
-	private ScrollPane scpTransactions;
-	@BXML
 	private NewTransactionDialog dlgNewTransaction;
+	@BXML
+	private TabPane tbpAccountDetails;
 
 	private Customer customer;
 	private BankAccount bankAccount;
 	private Bank bank;
-	
-	private boolean isCustomerContentInitialized = false;
-	private boolean isTransactionContentInitialized = false;
 
 	public WindowContent()
 	{
@@ -67,7 +60,8 @@ public class WindowContent extends TablePane implements Bindable
 	@Override
 	public void initialize(Map<String, Object> arg0, URL arg1, Resources arg2)
 	{
-		
+	    tbpAccountDetails.setVisible(false);
+	    tbpAccountDetails.getTabs().get(1).setEnabled(false);
 	}
 	
 	public void setWindowsOutput(File bankFile) throws FileNotFoundException, IOException, ClassNotFoundException, StreamCorruptedException
@@ -120,12 +114,14 @@ public class WindowContent extends TablePane implements Bindable
 					public void selectedNodeChanged(TreeView arg0, Object arg1)
 					{
 						TreeNode treeNode = (TreeNode) arg0.getSelectedNode();
+						tbpAccountDetails.setVisible(true);
+						
 						if (arg0.getSelectedNode() instanceof TreeBranch) {
 							customer = (Customer) treeNode.getUserData();
 							txtFirstName.setText(customer.getFirstname());
 							txtLastName.setText(customer.getLastname());
 							setSaveCustomerActions();
-							deinitializeWindowContentTransaction();
+							tbpAccountDetails.getTabs().get(1).setEnabled(false);
 						} else if (arg0.getSelectedNode() instanceof TreeNode) {
 							bankAccount = (BankAccount) treeNode.getUserData();
 							customer = (Customer) treeNode.getParent()
@@ -135,43 +131,10 @@ public class WindowContent extends TablePane implements Bindable
 							setTransactions(bankAccount);
 							setSaveCustomerActions();
 							setSaveTransactionActions();
-							if (!isTransactionContentInitialized)
-	                        {
-							    initializeWindowContentTransaction();
-	                        }
+							tbpAccountDetails.getTabs().get(1).setEnabled(true);
 						}
-						
-						if (!isCustomerContentInitialized)
-						{
-						    initializeWindowContentCustomer();
-						}
-						
 					}
 				});
-	}
-	
-	private void initializeWindowContentTransaction()
-	{
-	    psbNewTransaction.setVisible(true);
-	    scpTransactions.setVisible(true);
-	    isTransactionContentInitialized = true;
-	}
-	
-	private void deinitializeWindowContentTransaction()
-	{
-	    psbNewTransaction.setVisible(false);
-	    scpTransactions.setVisible(false);
-        isTransactionContentInitialized = false;
-	}
-	
-	private void initializeWindowContentCustomer()
-	{
-	    lblFirstName.setVisible(true);
-	    txtFirstName.setVisible(true);
-	    lblLastName.setVisible(true);
-	    txtLastName.setVisible(true);
-	    psbSaveCustomer.setVisible(true);
-	    isCustomerContentInitialized = true;
 	}
 
 	private void setTableViewActions()
@@ -277,6 +240,7 @@ public class WindowContent extends TablePane implements Bindable
                     bankAccount.deposit(currentDateTime, new Decimal(amount), "");
                     dlgNewTransaction.reset();
                     dlgNewTransaction.close();
+                    setTransactions(bankAccount);
                 } catch (Exception e){
                     e.printStackTrace();
                 }

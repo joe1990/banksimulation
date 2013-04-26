@@ -106,14 +106,13 @@ public class DateTime implements Cloneable, Serializable, Comparable<DateTime>
   
     public String toString()
     {
-        String str = String.format("%02d-%02d-%4d %02d:%02d:%02d:%03d", 
+        String str = String.format("%02d-%02d-%4d %02d:%02d:%02d", 
                                  getDayOfMonth(),
                                  getMonth(),
                                  getYear(),
                                  getHourOfDay(),
                                  getMinute(),
-                                 getSecond(),
-                                 getMillisecond());
+                                 getSecond());
         return str;
     }
     public String toStringDate()
