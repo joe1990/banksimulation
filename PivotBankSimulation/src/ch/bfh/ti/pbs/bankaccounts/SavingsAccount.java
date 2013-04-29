@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import ch.bfh.ti.pbs.bankactivities.InterestRate;
-import ch.bfh.ti.pbs.customers.Customer;
 import ch.bfh.ti.pbs.helpers.DateTime;
 import ch.bfh.ti.pbs.helpers.Decimal;
 

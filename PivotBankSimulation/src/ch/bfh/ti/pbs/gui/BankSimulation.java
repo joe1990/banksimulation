@@ -1,9 +1,7 @@
 package ch.bfh.ti.pbs.gui;
 
 import java.awt.Dimension;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import org.apache.pivot.beans.BXMLSerializer;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.wtk.Application;
@@ -12,11 +10,19 @@ import org.apache.pivot.wtk.Window;
 
 import ch.bfh.ti.pbs.helpers.BankReaderWriter;
 
+/**
+ * 
+ * GUI Main-Klasse. Beinhaltet die Methoden beim Start des GUIs (Erzeugen des Fensters) 
+ * und Beenden des GUIs (Schliessen und in Bank.dat speichern)
+ *
+ */
 public class BankSimulation implements Application
 {
     private Window window = null;
     
-    
+    /**
+     * Starten der Applikation
+     */
     @Override
     public void startup(Display display, Map<String, String> properties) throws Exception 
     {
@@ -30,6 +36,9 @@ public class BankSimulation implements Application
         window.open(display);
     }
  
+    /**
+     * Beenden der Applikation
+     */
     @Override
     public boolean shutdown(boolean optional) 
     {

@@ -1,23 +1,17 @@
 package ch.bfh.ti.pbs.gui;
 
 import java.net.URL;
-import java.util.Scanner;
-
 import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.Bindable;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.util.Resources;
-import org.apache.pivot.wtk.Button;
-import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.Dialog;
-import org.apache.pivot.wtk.DialogCloseListener;
-import org.apache.pivot.wtk.Display;
 import org.apache.pivot.wtk.PushButton;
 import org.apache.pivot.wtk.TextInput;
-import org.apache.pivot.wtk.Window;
 
-import ch.bfh.ti.pbs.helpers.BankReaderWriter;
-
+/**
+ * Dialog zum Hinzufügen einer neuen Transaktion.
+ */
 public class NewTransactionDialog extends Dialog implements Bindable
 {
     @BXML
@@ -30,16 +24,27 @@ public class NewTransactionDialog extends Dialog implements Bindable
     {
     }
     
+    /**
+     * Gibt den "New Transaction"-Button zurück.
+     * @return
+     */
     public PushButton getSaveTransactionButton()
     {
         return psbSaveTransaction;
     }
     
+    /**
+     * Gibt den im "New Transaction"-Dialog eingegebenen Wert (Amount) als String zurück.
+     * @return
+     */
     public String getAmount()
     {
         return txtAmount.getText();
     }
     
+    /**
+     * Löscht die Textbox im "New Transaction"-Dialog.
+     */
     public void reset()
     {
         txtAmount.setText("");

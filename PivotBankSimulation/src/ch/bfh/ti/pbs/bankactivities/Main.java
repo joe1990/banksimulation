@@ -1,15 +1,8 @@
 package ch.bfh.ti.pbs.bankactivities;
 
-
 import java.io.IOException;
-
 import org.apache.pivot.wtk.DesktopApplicationContext;
-
 import ch.bfh.ti.pbs.bankaccounts.BankAccount;
-import ch.bfh.ti.pbs.bankaccounts.CheckingAccount;
-import ch.bfh.ti.pbs.bankaccounts.SavingsAccount;
-import ch.bfh.ti.pbs.bankaccounts.TimeDepositAccount;
-import ch.bfh.ti.pbs.customers.Customer;
 import ch.bfh.ti.pbs.exceptions.UnderFlowException;
 import ch.bfh.ti.pbs.gui.BankSimulation;
 import ch.bfh.ti.pbs.helpers.DateTime;

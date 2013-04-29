@@ -1,22 +1,13 @@
 package ch.bfh.ti.pbs.gui;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.net.URL;
-import java.util.ArrayList;
-
 import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.Bindable;
 import org.apache.pivot.collections.List;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.collections.Sequence;
-import org.apache.pivot.collections.Sequence.Tree.Path;
 import org.apache.pivot.util.Resources;
 import org.apache.pivot.wtk.Action;
 import org.apache.pivot.wtk.Alert;
@@ -29,30 +20,22 @@ import org.apache.pivot.wtk.ListView;
 import org.apache.pivot.wtk.MessageType;
 import org.apache.pivot.wtk.Sheet;
 import org.apache.pivot.wtk.SheetCloseListener;
-import org.apache.pivot.wtk.TablePane;
-import org.apache.pivot.wtk.TreeView;
-import org.apache.pivot.wtk.TreeViewSelectionListener;
-import org.apache.pivot.wtk.content.TreeBranch;
-import org.apache.pivot.wtk.content.TreeNode;
 
-import ch.bfh.ti.pbs.customers.Customer;
-import ch.bfh.ti.pbs.exceptions.UnderFlowException;
-import ch.bfh.ti.pbs.helpers.BankReaderWriter;
-import ch.bfh.ti.pbs.helpers.DateTime;
-import ch.bfh.ti.pbs.helpers.Decimal;
-import ch.bfh.ti.pbs.bankaccounts.Bank;
-import ch.bfh.ti.pbs.bankaccounts.BankAccount;
-import ch.bfh.ti.pbs.bankaccounts.CheckingAccount;
-import ch.bfh.ti.pbs.bankaccounts.SavingsAccount;
-import ch.bfh.ti.pbs.bankaccounts.TimeDepositAccount;
-import ch.bfh.ti.pbs.bankactivities.InterestRate;
-
+/**
+ * Frame der Applikation.
+ * Klasse gehört zum BXML-File "BankSimulation.bxml"
+ *
+ */
 public class BankSimulationWindow extends Frame implements Bindable 
 {
     @BXML private FileBrowserSheet fbsOpenFile;
     @BXML private WindowContent tblWindowContent;
     @BXML private NewTransactionDialog dlgNewTransaction;
 
+    /**
+     * Konstruktor der Klasse.
+     * Erzeugt die Action Listeners für die Menüaktionen (Quit und Open).
+     */
     public BankSimulationWindow() 
     {
         Action.getNamedActions().put("actOpen", new Action() 
@@ -102,6 +85,9 @@ public class BankSimulationWindow extends Frame implements Bindable
         });
     }
     
+    /**
+     * Initialisiert das GUI mit den Daten aus dem .dat-File oder erzeugt ein neues Dat-File aus Beispieldaten und lädt dann dieses.
+     */
     @Override
     public void initialize(Map<String, Object> arg0, URL arg1, Resources arg2)
     {
@@ -120,12 +106,16 @@ public class BankSimulationWindow extends Frame implements Bindable
         setNewTransactionAction();
     }  
     
+    /**
+     * Fügt dem NewTransaction-Button den ActionListener für die Drücken-Aktion hinzu.
+     */
     private void setNewTransactionAction() 
     {
         tblWindowContent.getNewTransactionButton().getButtonPressListeners().add(new ButtonPressListener() {
             @Override
             public void buttonPressed(Button arg0)
             {
+                tblWindowContent.setNewTransactionDialog(dlgNewTransaction);
                 dlgNewTransaction.open(BankSimulationWindow.this);  
             }
         });

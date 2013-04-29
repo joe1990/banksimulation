@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import ch.bfh.ti.pbs.bankactivities.Transaction;
-import ch.bfh.ti.pbs.customers.Customer;
 import ch.bfh.ti.pbs.exceptions.UnderFlowException;
 import ch.bfh.ti.pbs.helpers.DateTime;
 import ch.bfh.ti.pbs.helpers.Decimal;
